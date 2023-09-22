@@ -8,9 +8,11 @@ const page = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setTasks([...tasks, { title, desc }]);
+    // setTasks([...tasks, { title: 'Aayus', desc: 'Jain' }]);
     setTitle('');
     setDesc('');
   };
+
   let renderTasks = <h2 className="text-xl font-medium">No tasks available</h2>;
   if (tasks.length > 0) {
     renderTasks = tasks.map((t, i) => {
@@ -35,6 +37,10 @@ const page = () => {
     let copyTask = [...tasks];
     copyTask.splice(i, 1);
     setTasks(copyTask);
+  };
+
+  const handleDeleteAll = () => {
+    setTasks([]);
   };
 
   return (
@@ -68,6 +74,16 @@ const page = () => {
       <hr />
       <div className="p-8 bg-slate-200">
         <ul>{renderTasks}</ul>
+        {tasks.length > 0 && (
+          <div className="flex items-center justify-center ">
+            <button
+              onClick={handleDeleteAll}
+              className="bg-red-600 text-white px-4 py-2 rounded font-semibold "
+            >
+              Delete All
+            </button>
+          </div>
+        )}
       </div>
     </>
   );
